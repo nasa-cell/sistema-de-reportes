@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: tecnosoluciones
+    runtime: php
+    plan: free
+    buildCommand: composer install
+    startCommand: php -S 0.0.0.0:10000 -t public
+    envVars:
+      - key: DATABASE_URL
+        scope: build
+      - key: ENVIRONMENT
+        value: production
+    healthCheckPath: /

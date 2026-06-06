@@ -1,0 +1,29 @@
+Options -MultiViews
+
+# Permitir cookies en todos los navegadores
+<FilesMatch "\.php$">
+    Header always set Set-Cookie "test=1"
+</FilesMatch>
+
+# Forzar HTTPS en ifastnet
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Redirigir a HTTPS si no es localhost
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^localhost
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Si el recurso existe, servirlo directamente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+# Permitir navegación sin cookies (fallback)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_METHOD} GET
+    RewriteRule ^ - [E=no_cookies:1]
+</IfModule>

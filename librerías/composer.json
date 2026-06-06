@@ -1,0 +1,26 @@
+{
+    "name": "tecnosoluciones/sistema-gestion",
+    "description": "Sistema Web de Gestión de Proyectos TecnoSoluciones S.A.",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=7.4",
+        "dompdf/dompdf": "^1.2"
+    },
+    "require-dev": {},
+    "autoload": {
+        "classmap": [
+            "app/config/",
+            "app/libs/",
+            "app/helpers/",
+            "app/modelos/",
+            "app/controladores/"
+        ]
+    },
+    "config": {
+        "process-timeout": 0
+    },
+    "scripts": {
+        "start": "php -S localhost:8009 -t public public/router.php"
+    }
+}
